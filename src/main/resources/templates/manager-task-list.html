@@ -19,6 +19,7 @@
         <tr>
             <th>Task Id</th>
             <th>Assignee Id</th>
+            <th>Assignee Name</th>
             <th>Title</th>
             <th>Description</th>
             <th>Latest Note</th>
@@ -31,6 +32,7 @@
 
             <td th:text="${tempTask.id}"/>
             <td th:text="${tempTask.assignee.id}"/>
+            <td th:text="${tempTask.assignee.userName}"/>
             <td th:text="${tempTask.title}"/>
             <td th:text="${tempTask.description}"/>
             <td th:text="${tempTask.latestNote}"/>

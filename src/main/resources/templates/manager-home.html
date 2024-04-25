@@ -15,7 +15,7 @@
 <p th:text="'Welcome back ' + ${user.userName}"/>
 
 <hr>
-<a th:href="@{/manage/task-list/{id}(id=${user.id})}">Get Task List of All Employees</a>
+<a class="btn btn-primary" th:href="@{/manage/task-list/{id}(id=${user.id})}">Get Task List of All Employees</a>
 
 </body>
 </html>

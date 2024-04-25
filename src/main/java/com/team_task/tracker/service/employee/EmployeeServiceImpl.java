@@ -5,6 +5,8 @@ import com.team_task.tracker.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -18,5 +20,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findByUsername(String username) {
         return employeeRepository.findByUserName(username);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
     }
 }

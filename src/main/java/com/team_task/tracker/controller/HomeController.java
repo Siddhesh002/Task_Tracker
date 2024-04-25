@@ -50,7 +50,7 @@ public class HomeController {
                 return "manager-home";
             } else if (authentication.getAuthorities().stream()
                     .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-                return "admin";
+                return "admin-home";
             }
         }
 
