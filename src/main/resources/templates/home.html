@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Welcome to Employee Homes</title>
+</head>
+<body>
+
+<div class="title">
+    <h1 th:text="'Welcome back ' + ${user.userName}"/>
+</div>
+
+<div class="container">
+    <h3>Employee Tasks</h3>
+    <hr>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Task Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Latest Note</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="tempTask : ${tasks}">
+
+                <td th:text="${tempTask.id}"/>
+                <td th:text="${tempTask.title}"/>
+                <td th:text="${tempTask.description}"/>
+                <td th:text="${tempTask.latestNote}"/>
+                <td th:text="${tempTask.status}"/>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
