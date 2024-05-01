@@ -14,8 +14,20 @@
 
 <p th:text="'Welcome back ' + ${user.userName}"/>
 
-<hr>
+<div>
+<form action="#" th:action="@{/manage/showFormForTaskUpdate}" method="POST">
+    <input type="hidden" name="managerId" th:value="${user.id}" />
+    <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Add Task</button>
+</form>
+</div>
+
+<br>
+<br>
 <a class="btn btn-primary" th:href="@{/manage/task-list/{id}(id=${user.id})}">Get Task List of All Employees</a>
 
+
+<hr>
+<hr>
+<a class="btn btn-primary" th:href="@{/login}">Go back to log in</a>
 </body>
 </html>

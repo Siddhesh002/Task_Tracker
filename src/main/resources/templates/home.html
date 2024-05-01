@@ -26,21 +26,42 @@
             <th>Description</th>
             <th>Latest Note</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
         </thead>
 
         <tbody>
-            <tr th:each="tempTask : ${tasks}">
+            <tr th:each="tempTask : ${tasks}"
+                th:class="${tempTask.status == 'COMPLETION_REQUESTED' ? 'table-info' : (tempTask.status == 'COMPLETED' ? 'table-success' : '')}">
 
                 <td th:text="${tempTask.id}"/>
                 <td th:text="${tempTask.title}"/>
                 <td th:text="${tempTask.description}"/>
                 <td th:text="${tempTask.latestNote}"/>
                 <td th:text="${tempTask.status}"/>
+
+                <td>
+                    <div class="row" th:if="${tempTask.status == 'IN_PROGRESS'}">
+                        <div class="col-small">
+                            <form action="#" th:action="@{/employee/requestTaskCompletion}" method="POST">
+                                <input type="hidden" name="taskId" th:value="${tempTask.id}" />
+                                <label>
+                                    <input type="text" name="newNote" placeholder="Enter new note" required/>
+                                </label>
+                                <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Request Completion</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+<hr>
+<a class="btn btn-primary" th:href="@{/login}">Go back to log in</a>
+
 
 </body>
 </html>

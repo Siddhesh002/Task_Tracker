@@ -24,11 +24,13 @@
             <th>Description</th>
             <th>Latest Note</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="tempTask : ${tasks}">
+        <tr th:each="tempTask : ${tasks}"
+            th:class="${tempTask.status == 'COMPLETION_REQUESTED' ? 'table-info' : (tempTask.status == 'COMPLETED' ? 'table-success' : '')}">
 
             <td th:text="${tempTask.id}"/>
             <td th:text="${tempTask.assignee.id}"/>
@@ -37,9 +39,68 @@
             <td th:text="${tempTask.description}"/>
             <td th:text="${tempTask.latestNote}"/>
             <td th:text="${tempTask.status}"/>
+            <td>
+                <div class="row" >
+                    <div class="row" >
+                        <div th:if="${tempTask.status == 'COMPLETION_REQUESTED'}">
+                            <form action="#" th:action="@{/manage/processTaskCompletionRequest}" method="POST">
+                                <input type="hidden" name="taskId" th:value="${tempTask.id}" />
+                                <input type="hidden" name="managerId" th:value="${managerId}" />
+                                <label>
+                                    <input type="text" name="newNote" placeholder="Enter new note" required/>
+                                </label>
+                                <label>
+                                    Action:
+                                    <select name="action">
+                                        <option value="accept">Accept</option>
+                                        <option value="reject">Reject</option>
+                                    </select>
+                                </label>
+                                <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Proceed</button>
+                            </form>
+                        </div>
+
+                        <form action="#" th:action="@{/manage/showFormForTaskUpdate}" method="POST">
+
+                            <input type="hidden" name="taskId" th:value="${tempTask.id}" />
+                            <input type="hidden" name="managerId" th:value="${managerId}" />
+                            <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Update</button>
+
+                        </form>
+
+                        <form action="#" th:action="@{/manage/delete}" method="POST">
+
+                            <input type="hidden" name="taskId" th:value="${tempTask.id}" />
+                            <input type="hidden" name="managerId" th:value="${managerId}" />
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="if (!(confirm('Are you sure you want to delete this task?'))) return false">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<br>
+<div>
+    <form action="#" th:action="@{/manage/showFormForTaskUpdate}" method="POST">
+        <input type="hidden" name="managerId" th:value="${managerId}" />
+        <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Add Task</button>
+    </form>
+</div>
+
+<br>
+
+<hr>
+<a class="btn btn-primary" th:href="@{/}">Go back home</a>
+
+<hr>
+<a class="btn btn-primary" th:href="@{/login}">Go back to log in</a>
 </body>
 </html>

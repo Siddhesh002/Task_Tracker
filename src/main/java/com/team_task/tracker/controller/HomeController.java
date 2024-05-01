@@ -25,7 +25,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String showEmployeeHome(Model model) {
-//        return "home";
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
 
@@ -54,7 +54,6 @@ public class HomeController {
             }
         }
 
-        // Default to home page if no matching role found
         return "home";
     }
 }

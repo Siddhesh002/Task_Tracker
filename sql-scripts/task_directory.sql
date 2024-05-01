@@ -27,7 +27,7 @@ VALUES
 (3,'ROLE_ADMIN');
 
 CREATE TABLE `members` (
-  `user_id` int NOT NULL,
+  `user_id` int AUTO_INCREMENT NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `pw` varchar(68) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -54,7 +54,7 @@ VALUES
 --
 
 CREATE TABLE `tasks` (
-	`task_id` int NOT NULL,
+	`task_id` int AUTO_INCREMENT NOT NULL,
     `title` varchar(50) NOT NULL,
     `description` varchar(100) NOT NULL,
     `status` varchar(100) DEFAULT 'IN_PROGRESS' NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `tasks` (
     
     FOREIGN KEY (`assignee_id`) REFERENCES members (`user_id`), 
     PRIMARY KEY (`task_id`)
-    );
+    )ENGINE=InnoDB DEFAULT CHARSET=latin1;
     
     INSERT INTO `tasks`
     VALUES

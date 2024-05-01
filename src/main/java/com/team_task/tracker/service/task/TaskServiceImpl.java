@@ -27,4 +27,19 @@ public class TaskServiceImpl implements TaskService{
         return taskRepository.findTasksByManagerId(managerId);
     }
 
+    @Override
+    public Task findById(Integer id) {
+        return taskRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Task task) {
+        taskRepository .save(task);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        taskRepository.deleteById(id);
+    }
+
 }

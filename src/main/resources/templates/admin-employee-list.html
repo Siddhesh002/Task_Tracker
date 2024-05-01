@@ -19,10 +19,12 @@
         <tr>
             <th>Employee Id</th>
             <th>Name</th>
+            <th>Password</th>
             <th>Email</th>
             <th>Manager Name</th>
             <th>Role</th>
             <th>Is Active</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
@@ -31,16 +33,53 @@
 
             <td th:text="${tempEmployee.id}"/>
             <td th:text="${tempEmployee.userName}"/>
+            <td th:text="${tempEmployee.password}"/>
             <td th:text="${tempEmployee.email}"/>
             <td>
-                <!-- Check if manager is not null before displaying manager's name -->
                 <span th:if="${tempEmployee.manager != null}" th:text="${tempEmployee.manager.userName}"></span>
             </td>
             <td th:text="${tempEmployee.role.role}"/>
             <td th:text="${tempEmployee.active}"/>
+            <td>
+                <div class="row">
+                    <div class="col-small">
+
+                        <form action="#" th:action="@{/admin/showFormForEmployeeUpdate}" method="POST">
+                            <input type="hidden" name="employeeId" th:value="${tempEmployee.id}" />
+                            <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Update</button>
+                        </form>
+
+                        <form action="#" th:action="@{/admin/delete}" method="POST">
+
+                            <input type="hidden" name="employeeId" th:value="${tempEmployee.id}" />
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="if (!(confirm('Are you sure you want to delete this Employee?'))) return false">
+                                Delete
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </td>
+
         </tr>
         </tbody>
     </table>
 </div>
+
+<br>
+<div>
+    <form action="#" th:action="@{/admin/showFormForEmployeeUpdate}" method="POST">
+        <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Create Employee</button>
+    </form>
+</div>
+
+<br>
+<hr>
+<a class="btn btn-primary" th:href="@{/}">Go back home</a>
+
+<hr>
+<a class="btn btn-primary" th:href="@{/login}">Go back to log in</a>
+
 </body>
 </html>

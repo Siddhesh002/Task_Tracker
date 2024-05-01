@@ -9,4 +9,10 @@ public interface TaskService {
    List<Task> findByUserId(Integer userId);
 
    List<Task> findByManagerId(Integer managerId);
+
+   Task findById(Integer id);
+
+   void save(Task task);
+
+   void deleteById(Integer id);
 }

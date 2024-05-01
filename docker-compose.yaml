@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  tracker_service:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3006/trackerDB?allowPublicKeyRetrieval=true&useSSL=false
+      - spring.datasource.username=task_tracker
+      - spring.datasource.password=TASK_TRACKER
+    depends_on:
+      - mysqldb
+    networks:
+      - mynetwork
+    volumes:
+      - .m2:/root/.m2
+
+  mysqldb:
+    image: "biarms/mysql:5.7"
+    restart: always
+    ports:
+      - 3006:3306
+    environment:
+      MYSQL_DATABASE: trackerDB
+      MYSQL_USER: task_tracker
+      MYSQL_PASSWORD: TASK_TRACKER
+      MYSQL_ROOT_PASSWORD: TASK_TRACKER
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
